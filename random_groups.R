@@ -5,7 +5,7 @@ library(readr)
 # Random names dataset I found from internet
 # https://www.briandunning.com/sample-data/
 
-students <- read.csv("us-500.csv")
+students <- read.csv("us-500-adjusted.csv")
 
 # number of groups
 groups <- 1:16
