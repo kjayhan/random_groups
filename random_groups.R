@@ -8,28 +8,27 @@ library(readr)
 students <- read.csv("us-500-adjusted.csv")
 
 # number of groups
-groups <- 1:16
+groups <- 1:7
+
 
 # Set seed to always get the same sampling
 set.seed(123)
 
 # I need to put students into 
 # three different teams for three different tasks.
-students$game_group <- complete_ra(length(students$first_name), num_arms = length(groups))
+students$game_group <- complete_ra(length(students$first_name), num_arms = length(groups),
+                                   conditions= c("England", "France", "Austria", "Germany", "Russia", "Turkey", "Italy"))
 # Check the number of students to make sure all is well.
-length(students$game_group[students$game_group == "T3"])
+length(students$game_group[students$game_group == "England"])
 
-set.seed(20220903)
+set.seed(123)
 students$debate_group <- complete_ra(length(students$first_name), num_arms = length(groups))
 
-set.seed(1905)
+set.seed(123)
 students$presentation_group <- complete_ra(length(students$first_name), num_arms = length(groups))
 
 # randomizr makes teams as factors (T1, T2 etc.). 
 # I Change them to numbers.
-
-students$game_group <- as.character(students$game_group)
-students$game_group <- parse_number(students$game_group)
 
 students$debate_group <- as.character(students$debate_group)
 students$debate_group <- parse_number(students$debate_group)

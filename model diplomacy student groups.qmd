@@ -1,0 +1,42 @@
+---
+title: "UNSC Simulation: Ewha IREA Fall 2023"
+format: html
+author: Kadir Jun Ayhan
+date: today
+editor: visual
+code-fold: true
+warning: false
+---
+
+# Randomizing Students into Groups
+
+```{r}
+library(tidyverse)
+library(randomizr)
+library(readr)
+```
+
+```{r}
+
+# Random names dataset I found from internet
+# https://www.briandunning.com/sample-data/
+
+#students <- read.csv("us-500-adjusted.csv")
+
+# number of groups
+#groups <- 1:16
+
+
+students <- tibble::tribble(~Student,
+                            "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
+
+countries <- c("USA", "Russia", "UK", "France", "China", "Japan", "Ecuador", "Brazil", "Ghana", "Switzerland", "Gabon", "United Arab Emirates")
+
+# Set seed to always get the same sampling
+set.seed(123)
+
+students$Country <- complete_ra(length(students$Student), num_arms = length(countries),
+conditions= countries)
+
+gt::gt(students)
+```
